@@ -1,12 +1,8 @@
 <?php
 namespace Controllers;
 
-use Models\Producto;
 use Models\Pedido;
 use Lib\Pages;
-use Utils\Utils;
-use Lib\BaseDatos;
-use PDOException;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -17,11 +13,9 @@ require "vendor/phpmailer/phpmailer/src/SMTP.php";
 class PedidoController {
 
     private Pages $pages;
-    private BaseDatos $bd;
 
     public function __construct() {
         $this->pages = new Pages();
-        $this->bd = new BaseDatos();
     }
 
     public function save() : void {
@@ -106,7 +100,7 @@ class PedidoController {
         try {
             $mail->setFrom("iamabot1303@gmail.com");
             $mail->addAddress($_SESSION["identity"]->email);
-            $mail->isHTML(true);
+            $mail->isHTML();
 
             $mail->Subject = "Pedido realizado";
             ob_start();
@@ -114,7 +108,7 @@ class PedidoController {
             $mail->Body = ob_get_clean();
             $mail->send();
 
-        } catch (Exception $e) {
+        } catch (Exception) {
             echo "Error al enviar el correo: $mail->ErrorInfo";
         }
     }
