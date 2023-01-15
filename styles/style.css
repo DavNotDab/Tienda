@@ -1,0 +1,191 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f2f2f2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
+    width: 43%;
+}
+
+.form_content {
+    padding: 30px 40px;
+    margin: 20px 0 50px 0;
+    background-color: #cecece;
+    border-radius: 10px;
+    box-shadow: #464646 0 0 10px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0 30px;
+    margin: 0 0 20px 0;
+}
+
+.input_field {
+    width: 97%;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+}
+
+.submit_login, .submit_registro {
+    width: fit-content;
+    margin: auto;
+    padding: 10px;
+    background-color: #464646;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .3s ease;
+}
+
+.submit_login:hover, .submit_registro:hover {
+    box-shadow: black 0 0 5px;
+}
+
+.title {
+    text-align: center;
+}
+
+.nav_menu {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 16%;
+    background-color: lightblue;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0;
+    margin: 50% 0 0 20%;
+    gap: 25px;
+}
+
+.links li a {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 10px 0;
+    transition: .3s ease-out;
+}
+
+.links li a:hover {
+    color: red;
+}
+
+.login li a:active {
+    color: green;
+}
+
+.listado {
+    margin: 20px 0 0 100px;
+    text-align: center;
+    border-collapse: separate;
+    border-spacing: 10px 0;
+}
+
+.listado th {
+    padding: 0 20px 5px 20px;
+    border-bottom: black 2px solid;
+}
+.listado td {
+    padding: 5px 0;
+}
+
+.boton {
+    width: fit-content;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.boton_confirm, .boton_cancel {
+    padding: 5px 7px;
+    color: whitesmoke;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.boton_cancel {
+    background-color: red;
+}
+
+.boton_confirm {
+    background-color: green;
+}
+
+.boton_cancel:hover {
+    background-color: #c90000;
+}
+
+.boton_confirm:hover {
+    background-color: #006b00;
+}
+
+.finalCarrito {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.error {
+    margin: 0 0 20px 0;
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
+footer {
+    width: 99%;
+    bottom: 10px;
+    padding: 0;
+}
+
+.autor {
+    display: flex;
+    padding: 0;
+    width: 80%;
+    margin-left: 20%;
+}
+
+.copy {
+    display: flex;
+    min-width: 50%;
+    text-align: center;
+    align-items: center;
+    margin-left: 10%;
+    padding-bottom: 0;
+}
+
+.github a {
+    display: flex;
+    align-items: center;
+    text-decoration: underline;
+    color: black;
+}
+
+.logo {
+    max-width: 32px;
+}
+
+.imagen {
+    width: 100px;
+}
