@@ -25,27 +25,41 @@ class PedidoController {
                 $usuarioID = $_SESSION["identity"]->id;
                 $pedido = new Pedido();
 
-                // TODO validar direccion entrega
-                $pedido->setUsuarioId($usuarioID);
-                $pedido->setProvincia($_POST["data"]["provincia"]);
-                $pedido->setLocalidad($_POST["data"]["localidad"]);
-                $pedido->setDireccion($_POST["data"]["direccion"]);
-                $pedido->setCoste($carrito["total"]);
+                $valido = $pedido->validarDireccion($_POST["data"]);
 
-                $correcto = $pedido->save();
+                if ($valido === true) {
 
-                if ($correcto) {
-                    $pedido->reducirStock($carrito["productos"]);
-                    // TODO verificar que hay stock al hacer pedido
-                    $id_pedido = Pedido::getUltimoPedido();
-                    $_SESSION["IdPedido"] = $id_pedido;
-                    $this->sendEmail();
-                    unset($_SESSION["carrito"]);
-                    $this->pages->render("pedido/correcto");
+                    // TODO validar direccion entrega
+                    $pedido->setUsuarioId($usuarioID);
+                    $pedido->setProvincia($_POST["data"]["provincia"]);
+                    $pedido->setLocalidad($_POST["data"]["localidad"]);
+                    $pedido->setDireccion($_POST["data"]["direccion"]);
+                    $pedido->setCoste($carrito["total"]);
+
+                    if ($pedido->hayStock($carrito["productos"])){
+                        $correcto = $pedido->save();
+
+                        if ($correcto) {
+                            $pedido->reducirStock($carrito["productos"]);
+                            $id_pedido = Pedido::getUltimoPedido();
+                            $_SESSION["IdPedido"] = $id_pedido;
+                            $this->sendEmail();
+                            unset($_SESSION["carrito"]);
+                            $this->pages->render("pedido/correcto");
+                        } else {
+                            $this->pages->render("pedido/error");
+                        }
+                        header("Refresh: 2; URL=".base_url);
+                    }
+                    else {
+                        $errorStock = "No hay stock suficiente de alguno de los productos";
+                        $this->pages->render("carrito/ver", ["errorStock" => $errorStock]);
+                        header("Refresh: 2; URL=".base_url."carrito/ver");
+
+                    }
                 } else {
-                    $this->pages->render("pedido/error");
+                    $this->pages->render("pedido/hacer", ["error" => $valido]);
                 }
-                header("Refresh: 2; URL=".base_url);
             }
             else {
                 $this->pages->render("pedido/hacer");
@@ -93,7 +107,7 @@ class PedidoController {
         $mail->Host = "smtp.gmail.com";
         $mail->SMTPAuth = true;
         $mail->Username = "iamabot1303@gmail.com";
-        $mail->Password = "vvwkjlldeabtxpxl";
+        $mail->Password = "rxzhgqczmyoxbdhs";
         $mail->SMTPSecure = "ssl";
         $mail->Port = 465;
 

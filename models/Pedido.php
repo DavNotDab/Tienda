@@ -174,5 +174,35 @@ class pedido {
         return $sql->fetch(\PDO::FETCH_OBJ)->id;
     }
 
+    public function hayStock(mixed $productos): bool {
+        foreach ($productos as $producto) {
+            $sql = $this->bd->prepare("SELECT stock FROM productos WHERE id = :id");
+            $sql->bindParam(":id", $producto->id, \PDO::PARAM_INT);
+            $sql->execute();
+            $stock = $sql->fetch(\PDO::FETCH_OBJ)->stock;
+            if ($stock < $producto->unidades) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public function validarDireccion($datos) : bool|string {
+        $direccion = Utils::validarDireccion($datos["direccion"]);
+        $direccion2 = Utils::validarDireccion($datos["direccion2"], false);
+        $localidad = Utils::validarNombre($datos["localidad"]);
+        $provincia = Utils::validarNombre($datos["provincia"]);
+
+        if ($direccion === true) {
+            if ($direccion2 === true) {
+                if ($localidad === true) {
+                    if ($provincia === true) {
+                        return true;
+                    } else return $provincia;
+                } else return $localidad;
+            } else return $direccion2;
+        } else return $direccion;
+    }
+
 
 }

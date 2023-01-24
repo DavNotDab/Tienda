@@ -17,7 +17,7 @@
         <input type="text" name="data[direccion]" id="direccion" required class="input_field">
         <br>
         <label for="direccion2">Escalera, Piso, Puerta:</label>
-        <input type="text" name="data[direccion2" id="direccion2" class="input_field">
+        <input type="text" name="data[direccion2]" id="direccion2" class="input_field">
         <br>
         <label for="localidad">Localidad:</label>
         <input type="text" name="data[localidad]" id="localidad" required class="input_field">
@@ -25,7 +25,7 @@
         <label for="provincia">Provincia:</label>
         <input type="text" name="data[provincia]" id="provincia" required class="input_field">
         <br>
-        <?php echo $error ?? "" ?>
+        <span class="error"><?= $error ?? "";?></span>
         <input type="submit" value="Hacer pedido" class="submit">
     </form>
 </div>

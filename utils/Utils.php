@@ -29,7 +29,7 @@ class Utils {
 
     public static function validarTexto(string $texto) : bool|string {
         try {
-            if (!preg_match("/^[a-zA-Z0-9\s\-_!¡?¿.,áéíóúÁÉÍÓÚñÑ]*$/", $texto)) {
+            if (!preg_match("/^[a-zA-Z0-9\s\-_\/º°!¡?¿.,áéíóúÁÉÍÓÚñÑ]*$/", $texto)) {
                 throw new Exception("El texto no puede contener caracteres especiales");
             }
             if (strlen($texto) < 3) {
@@ -137,6 +137,26 @@ class Utils {
 
             move_uploaded_file($imagen["tmp_name"], "./images/".$nombre);
 
+            return true;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public static function validarDireccion(string $texto, bool $checkLength = true) : bool|string {
+        try {
+            if (!preg_match("/^[a-zA-Z0-9\s\-_\/º°!¡?¿.,áéíóúÁÉÍÓÚñÑ]*$/", $texto)) {
+                throw new Exception("La direccion no puede contener caracteres especiales");
+            }
+            if ($checkLength === true) {
+                if (strlen($texto) < 3) {
+                    throw new Exception("La direccion debe tener al menos 3 caracteres");
+                }
+            }
+
+            if (strlen($texto) > 200) {
+                throw new Exception("La direccion no puede tener más de 200 caracteres");
+            }
             return true;
         } catch (Exception $e) {
             return $e->getMessage();
