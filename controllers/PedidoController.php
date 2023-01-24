@@ -29,7 +29,6 @@ class PedidoController {
 
                 if ($valido === true) {
 
-                    // TODO validar direccion entrega
                     $pedido->setUsuarioId($usuarioID);
                     $pedido->setProvincia($_POST["data"]["provincia"]);
                     $pedido->setLocalidad($_POST["data"]["localidad"]);
